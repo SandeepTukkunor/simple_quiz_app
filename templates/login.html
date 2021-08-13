@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <title>Login</title>
+{% endblock %}
+
+{% block content %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}" role="alert"> {{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+    <h1 class="login">Login</h1>
+    <div class="login-box">
+        <center>
+            <form action="/login" method="POST" id="login-form">
+                <input required type="text" name="username" placeholder="Username" id="username">
+                <br>
+                <input required type="password" name="password" placeholder="Password">
+                <br>
+                <button required type="submit" class="btn btn-outline-warning btn-lg">Login</button>
+            </form>
+        </center>
+    </div>
+    <p class="create-account">Or <a href="/create-account">Create an Account</a></p>
+{% endblock %}
